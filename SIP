@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIP Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .calculator {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="number"] {
+            width: 100%;
+            height: 30px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            height: 40px;
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3e8e41;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>SIP Calculator</h2>
+        <label for="investment">Monthly Investment Amount:</label>
+        <input type="number" id="investment" placeholder="Enter amount">
+        <label for="rate">Expected Rate of Return (%):</label>
+        <input type="number" id="rate" placeholder="Enter rate">
+        <label for="years">Investment Period (Years):</label>
+        <input type="number" id="years" placeholder="Enter years">
+        <button id="calculate">Calculate</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const investmentInput = document.getElementById('investment');
+        const rateInput = document.getElementById('rate');
+        const yearsInput = document.getElementById('years');
+        const calculateButton = document.getElementById('calculate');
+        const resultDiv = document.getElementById('result');
+
+        calculateButton.addEventListener('click', calculateSIP);
+
+        function calculateSIP() {
+            const investment = parseFloat(investmentInput.value);
+            const rate = parseFloat(rateInput.value) / 100 / 12;
+            const years = parseFloat(yearsInput.value);
+            const months = years * 12;
+
+            const futureValue = investment * (((Math.pow(1 + rate, months) - 1) / rate) * (1 + rate));
+
+            resultDiv.innerText = `Future Value: ₹${futureValue.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
